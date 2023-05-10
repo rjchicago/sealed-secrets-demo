@@ -46,6 +46,10 @@ spec:
             fieldRef:
               fieldPath: metadata.name
         ## SECRET DEMO
+        ## comment the following...
+        - name: FOO
+          value: NULL
+        ## uncomment the following...
         # - name: FOO
         #   valueFrom:
         #     secretKeyRef:
@@ -64,6 +68,7 @@ spec:
         configMap:
           name: config
       ## SECRET DEMO
+      ## uncomment the following...
       # - name: secret
       #   secret:
       #     secretName: secret

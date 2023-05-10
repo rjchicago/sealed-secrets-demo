@@ -192,3 +192,25 @@ sealedsecrets:
   secret:
     FOO: <paste sealedsecret value>
 ```
+
+open [./k8s/demo/templates/deployment.yaml](./k8s/demo/templates/deployment.yaml) and search "SECRET DEMO"...
+
+### Reloader
+
+With reloader, you do not have to manually restart a deployment for config/secret changes.
+
+``` sh
+NAMESPACE=reloader
+
+# install
+helm upgrade --install \
+    --create-namespace \
+    -n $NAMESPACE \
+    --dependency-update \
+    -f ./k8s/$NAMESPACE/clusters/${CLUSTER:-local}/values.yaml \
+    $NAMESPACE \
+    ./k8s/$NAMESPACE
+
+# check
+kubectl get all -n $NAMESPACE
+```
