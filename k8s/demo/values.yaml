@@ -9,3 +9,5 @@ ingress:
 config:
   glob: "config/*"
   mountPath: /etc/nginx/templates
+
+sealedsecrets: {}

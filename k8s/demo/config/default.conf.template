@@ -11,7 +11,7 @@ server {
       "namespace": "${NAMESPACE}",
       "pod": "${POD}",
       "path": "$uri",
-      "message": "Argo CD is great!"
+      "FOO": "${FOO}"
     }';
   }
   

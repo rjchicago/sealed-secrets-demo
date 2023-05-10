@@ -158,3 +158,37 @@ Open:
 * <http://kubeseal.localhost:8080/>
 
 Enjoy!
+
+### Demo
+
+``` sh
+NAMESPACE=demo
+
+# install
+helm upgrade --install \
+    --create-namespace \
+    -n $NAMESPACE \
+    --dependency-update \
+    -f ./k8s/$NAMESPACE/clusters/${CLUSTER:-local}/values.yaml \
+    $NAMESPACE \
+    ./k8s/$NAMESPACE
+
+# check
+kubectl get all -n $NAMESPACE
+```
+
+Next, we'll create a sealed secret in our namespace:
+
+``` sh
+curl 'http://kubeseal.localhost:8080/secrets' \
+  -H 'Content-Type: application/json' \
+  -d '{"secret": "secret","namespace": "demo","scope": "strict","secrets": [{"key": "FOO","value": "QkFS"}]}' | jq '.[0].value' | pbcopy # sealedsecret value will be copied to clipboard
+```
+
+open [./k8s/demo/clusters/local/values.yaml](./k8s/demo/clusters/local/values.yaml) and add the following...
+
+``` yaml
+sealedsecrets:
+  secret:
+    FOO: <paste sealedsecret value>
+```

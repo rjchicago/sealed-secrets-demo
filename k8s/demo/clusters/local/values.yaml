@@ -1,0 +1,6 @@
+ingress:
+  match: HostRegexp(`{domain:demo\..+}`)
+
+# sealedsecrets:
+#   secret:
+#     FOO: <paste sealedsecret value>

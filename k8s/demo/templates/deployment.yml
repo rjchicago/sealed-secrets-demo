@@ -45,6 +45,12 @@ spec:
           valueFrom:
             fieldRef:
               fieldPath: metadata.name
+        ## SECRET DEMO
+        # - name: FOO
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: secret
+        #       key: FOO
         resources:
           requests:
             memory: "64Mi"
@@ -57,3 +63,7 @@ spec:
       - name: config
         configMap:
           name: config
+      ## SECRET DEMO
+      # - name: secret
+      #   secret:
+      #     secretName: secret
