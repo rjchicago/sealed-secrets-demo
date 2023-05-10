@@ -1,0 +1,11 @@
+deployment:
+  image: nginx:1.23-alpine
+  replicas: 2
+  port: 80
+
+ingress:
+  match: HostRegexp(`{domain:int-demo\..+}`)
+
+config:
+  glob: "config/*"
+  mountPath: /etc/nginx/templates

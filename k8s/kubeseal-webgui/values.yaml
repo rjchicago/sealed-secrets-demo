@@ -1,0 +1,12 @@
+kubeseal-webgui:
+  api:
+    url:
+  sealedSecrets:
+    autoFetchCert: true
+    controllerName: sealed-secrets
+    controllerNamespace: sealed-secrets
+
+ingress:
+  service: kubeseal-webgui
+  port: 8080
+  match: HostRegexp(`{domain:kubeseal\..+}`)

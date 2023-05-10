@@ -1,0 +1,9 @@
+{{- if .Values.local }}
+apiVersion: v1
+kind: Secret
+metadata:
+  name: certs
+data:
+  tls.key: {{ .Values.local.tls.key }}
+  tls.crt: {{ .Values.local.tls.crt }}
+{{- end }}

@@ -1,0 +1,6 @@
+apiVersion: v2
+version: 0.1.0
+name: demo
+description: Demo App
+type: application
+appVersion: "0.1.0"

@@ -1,0 +1,18 @@
+{{- if .Capabilities.APIVersions.Has "traefik.containo.us/v1alpha1" }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: ingress
+spec:
+  entryPoints:
+  - web
+  - websecure
+  routes:
+  - kind: Rule
+    match: {{ .Values.ingress.match }}
+    services:
+    - kind: Service
+      name: {{ .Values.ingress.service }}
+      port: {{ .Values.ingress.port }}
+      passHostHeader: true
+{{- end }}

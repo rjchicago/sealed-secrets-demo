@@ -1,0 +1,28 @@
+{{- if .Capabilities.APIVersions.Has "traefik.containo.us/v1alpha1" }}
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: {{ .Release.Namespace }}
+  namespace: {{ .Release.Namespace }}
+spec:
+  entryPoints:
+  - web
+  - websecure
+  routes:
+  - kind: Rule
+    match: HostRegexp(`{domain:traefik[\d]?\..+}`)
+    services:
+    - name: api@internal
+      kind: TraefikService
+  - kind: Rule
+    match: HostRegexp(`{domain:traefik[\d]?\..+}`) && PathPrefix(`/metrics`)
+    services:
+    - name: prometheus@internal
+      kind: TraefikService
+  - kind: Rule
+    match: HostRegexp(`{domain:traefik[\d]?\..+}`) && PathPrefix(`/ping`)
+    priority: 100
+    services:
+    - name: ping@internal
+      kind: TraefikService
+{{- end }}

@@ -1,0 +1,72 @@
+# Traefik Config 2.x
+
+# Entrypoints configuration
+entryPoints:
+  ping:
+    address: ':9000'
+  metrics:
+    address: ':8084'
+  web:
+    address: ':80'
+    forwardedHeaders:
+      insecure: true
+    http:
+      middlewares:
+        - compress@file
+  websecure:
+    address: ':443'
+    forwardedHeaders:
+      insecure: true
+    http:
+      middlewares:
+        - compress@file
+      tls:
+        domains:
+          - main: "localhost"
+            sans:
+              - "*.localhost"
+
+# API and dashboard configuration
+api: {}
+  # dashboard: true
+  # insecure: true
+  # debug: true
+
+# Ping configuration
+ping:
+  entryPoint: ping
+
+# Enable Prometheus metrics
+metrics:
+  prometheus:
+    addEntryPointsLabels: true
+    addServicesLabels: true
+    entryPoint: metrics
+    buckets:
+      - 0.1
+      - 0.3
+      - 1.2
+      - 5.0
+
+# Traefik logs configuration
+log:
+  level: ERROR
+
+# Traefik Access logs configuration
+accessLog:
+  filePath: /var/log/traefik2-access.log.json
+  bufferingSize: 100
+  format: json
+  fields:
+    defaultMode: keep
+    headers:
+      defaultMode: keep
+      names:
+        Authorization: drop
+
+# Docker configuration backend
+providers:
+  file:
+    directory: /etc/traefik
+  kubernetesCRD: {}
+  kubernetesIngress: {}

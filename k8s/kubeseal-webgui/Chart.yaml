@@ -1,0 +1,8 @@
+apiVersion: v2
+name: kubeseal-webgui
+version: 0.0.1
+
+dependencies:
+- repository: https://jaydee94.github.io/kubeseal-webgui/
+  name: kubeseal-webgui
+  version: 5.1.1

@@ -1,0 +1,3 @@
+kubeseal-webgui:
+  api:
+    url: http://kubeseal.localhost:8080

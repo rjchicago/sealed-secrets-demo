@@ -1,0 +1,2 @@
+ingress:
+  match: HostRegexp(`{domain:demo\..+}`)
